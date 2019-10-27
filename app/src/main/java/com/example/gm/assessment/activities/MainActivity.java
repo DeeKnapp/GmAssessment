@@ -9,13 +9,23 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.gm.assessment.MyApplication;
 import com.example.gm.assessment.R;
+import com.example.gm.assessment.business_object.Commit;
+import com.example.gm.assessment.presenters.GitCommitsPresenter;
+import com.example.gm.assessment.reactive_views.GitCommitsReactiveView;
 
-public class MainActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+public class MainActivity extends AppCompatActivity implements GitCommitsReactiveView {
+
+    @Inject
+    GitCommitsPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((MyApplication)getApplication()).getAppComponent().inject(this);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -28,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        presenter.setView(this);
+
+        presenter.getRecentCommits();
     }
 
     @Override
@@ -50,5 +63,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void getCommitsSuccess(Commit[] commits) {
+
+    }
+
+    @Override
+    public void getCommitsFailure() {
+
     }
 }
