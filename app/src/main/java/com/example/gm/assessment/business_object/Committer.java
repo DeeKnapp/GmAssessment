@@ -8,9 +8,11 @@ public class Committer {
     @SerializedName("name")
     @Expose
     public String name;
+
     @SerializedName("email")
     @Expose
     public String email;
+
     @SerializedName("date")
     @Expose
     public String date;

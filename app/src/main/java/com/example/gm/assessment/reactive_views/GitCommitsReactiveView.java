@@ -1,11 +1,11 @@
 package com.example.gm.assessment.reactive_views;
 
-import com.example.gm.assessment.business_object.Commit;
+import com.example.gm.assessment.business_object.CommitsResponse;
 
 public interface GitCommitsReactiveView {
 
-    void getCommitsSuccess(Commit[] commits);
+    void onSuccess(CommitsResponse[] commits);
 
-    void getCommitsFailure();
+    void pnFailure();
 
 }
