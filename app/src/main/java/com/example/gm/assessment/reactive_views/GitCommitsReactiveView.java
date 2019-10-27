@@ -6,6 +6,6 @@ public interface GitCommitsReactiveView {
 
     void onSuccess(CommitsResponse[] commits);
 
-    void pnFailure();
+    void onFailure();
 
 }

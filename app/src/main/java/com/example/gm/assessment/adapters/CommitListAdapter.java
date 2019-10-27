@@ -16,13 +16,14 @@ import javax.inject.Inject;
 public class CommitListAdapter extends RecyclerView.Adapter<CommitListAdapter.CommitViewHolder> {
 
     private CommitsResponse[] commits;
+    private Context context;
 
     @Inject
     public CommitListAdapter() {
     }
 
-    public CommitsResponse[] getCommits() {
-        return commits;
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public void setCommits(CommitsResponse[] commits) {
@@ -39,10 +40,9 @@ public class CommitListAdapter extends RecyclerView.Adapter<CommitListAdapter.Co
     @Override
     public void onBindViewHolder(@NonNull CommitViewHolder commitViewHolder, int i) {
         CommitsResponse commitsResponse = commits[i];
-        commitViewHolder.name.setText("Author's name: " + commitsResponse.commit.committer.name);
-        commitViewHolder.commitHash.setText("Commit: " + commitsResponse.sha);
-        commitViewHolder.commitMessage.setText("Commit Message: " + commitsResponse.commit.message);
-
+        commitViewHolder.name.setText(context.getString(R.string.authors_name, commitsResponse.commit.committer.name));
+        commitViewHolder.commitHash.setText(context.getString(R.string.commit_hash, commitsResponse.sha));
+        commitViewHolder.commitMessage.setText(context.getString(R.string.commit_message, commitsResponse.commit.message));
     }
 
     @Override
@@ -62,13 +62,9 @@ public class CommitListAdapter extends RecyclerView.Adapter<CommitListAdapter.Co
 
         CommitViewHolder(View view) {
             super(view);
-
             name = view.findViewById(R.id.authorName);
             commitHash = view.findViewById(R.id.commitHash);
             commitMessage = view.findViewById(R.id.commitMessage);
-
         }
     }
-
 }
-

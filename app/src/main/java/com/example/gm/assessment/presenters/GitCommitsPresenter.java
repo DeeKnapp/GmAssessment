@@ -40,6 +40,6 @@ public class GitCommitsPresenter implements Callback<CommitsResponse[]> {
     @Override
     public void onFailure(Call<CommitsResponse[]> call, Throwable t) {
         Log.d(TAG, t.getMessage());
-        reactiveView.pnFailure();
+        reactiveView.onFailure();
     }
 }
